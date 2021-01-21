@@ -1,0 +1,34 @@
+public static void expandTerminal(String terminal){
+        TerminalStack.pop();// pop stack
+        if (grammarmap.get(terminal).RHS.size()> 1){ // if more than one possible statement
+            for (int i = grammarmap.get(terminal).RHS.size()-1; i > 0 ; i--){
+                HistoryStack.push(grammarmap.get(terminal).RHS.get(i));
+                currStackAdded++;
+            }
+            parentNode = grammarmap.get(terminal).LHS;
+        }
+        for(int i = grammarmap.get(terminal).RHS.get(0).size(); i > 0; i--){ // push production rules to stack
+            TerminalStack.push(grammarmap.get(terminal).RHS.get(0).get(i-1));
+            currStackAdded++;
+        }
+        for(int i = 0; i < grammarmap.get(terminal).RHS.get(0).size(); i++){ //check elements
+            if(Character.isUpperCase(grammarmap.get(terminal).RHS.get(0).get(i).name.charAt(0))){ // if terminals
+                if(isPossible(TerminalStack.peek().name, inputStack.peek().toString())) // if input is possible given current terminal
+                    inputStack.pop();
+                else{       // else 
+                    if(HistoryStack.isEmpty()){ // there is no possible statement left break
+                        break;
+                    }
+                    else{0
+                        expandTerminal(HistoryStack.pop().get(0).name); // else get next possible statement
+                    }
+
+                }
+
+            }
+            else{
+                expandTerminal(TerminalStack.peek().name);  
+            }
+        }
+        
+    }

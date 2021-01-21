@@ -1,10 +1,11 @@
-INPUT: EXPRESSION;
-EXPRESSION: ENCLOSED_EXPRESSION OPERATION;
-ENCLOSED_EXPRESSION: OPEN_PAREN EXPRESSION CLOSE_PAREN | OPEN_BRACE EXPRESSION CLOSE_BRACE | DIGIT+ OPERATION ;
-OPERATION: MULTIPLICATION | ADDITION ;
-MULTIPLICATION: MUL EXPRESSION | ;
-ADDITION: PLUS EXPRESSION | ;
-DIGIT : ZERO | ONE | TWO | THREE | FOUR | FIVE | SIX | SEVEN | EIGHT | NINE ;
+start: expression;
+expression: enclosed_expression operation;
+enclosed_expression: OPEN_PAREN expression CLOSE_PAREN | OPEN_BRACE expression CLOSE_BRACE | digit+ operation ;
+operation: multiplication | addition | ;
+multiplication: MUL expression ;
+addition: PLUS expression ;
+digit : ZERO | ONE | TWO | THREE | FOUR | FIVE | SIX | SEVEN | EIGHT | NINE ;
+
 OPEN_PAREN : '(';
 CLOSE_PAREN : ')';
 OPEN_BRACE : '[';
